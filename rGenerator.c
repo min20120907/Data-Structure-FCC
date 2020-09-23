@@ -1,10 +1,21 @@
 #include<stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+// Declare the compare funciton, that can convert all the types of elements into integer hashcode.
+int cmpfunc(const void * a, const void * b){
+	return (*(int*)a - *(int*)b);
+}
 
 int main(void){
 	printf("Please enter a threshold number: \n");
 	int threshold;
 	scanf("%d", &threshold);
+	
+	int digits;
+
+	printf("Please enter the digits of numbers:\n");
+	scanf("%d", &digits);
 
 	int randArr[10];
 	int min=0, max=0;
@@ -16,7 +27,7 @@ int main(void){
 	srand(0);
 	
 	for(int i = 0; i < 10; i++){
-		randArr[i] = rand();
+		randArr[i] = rand() % (int) (pow((double)10, (double)digits));
 		if(randArr[i] >= threshold){	
 			v1[max] = randArr[i];
 			max++;
@@ -40,6 +51,13 @@ int main(void){
 		printf("%d ", v2[i]);
 	
 	printf("\n");
+
+	qsort(randArr, 10, sizeof(int), cmpfunc);
+	printf("Sorted: ");
+	for (int i = 0;i < 10; i++)
+		printf("%d ", randArr[i]);
+	printf("\n");
+	printf("medium value: \n%d\n", randArr[5]);
 
 	return 0;
 }
