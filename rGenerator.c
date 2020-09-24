@@ -9,20 +9,20 @@ int cmpfunc(const void * a, const void * b){
 
 int main(void){
 	printf("Please enter a threshold number: \n");
-	int threshold;
-	scanf("%d", &threshold);
+	double threshold;
+	scanf("%lf", &threshold);
 	
 	int digits;
 
 	printf("Please enter the digits of numbers:\n");
 	scanf("%d", &digits);
 
-	int randArr[10];
+	double randArr[10];
 	int min=0, max=0;
-	int *v1, *v2;
+	double *v1, *v2;
 
-	v1 = malloc(sizeof(int)*10);
-	v2 = malloc(sizeof(int)*10);
+	v1 = malloc(sizeof(double)*10);
+	v2 = malloc(sizeof(double)*10);
 
 	srand(0);
 	
@@ -39,25 +39,25 @@ int main(void){
 	}
 	printf("random array: ");
 	for (int i = 0; i< 10;i++)
-		printf("%d ", randArr[i]);
+		printf("%lf ", randArr[i]);
 	printf("\n");
 	printf("max array: ");
 	for(int i = 0;i < max-1;i++)
-		printf("%d ", v1[i]);
+		printf("%lf ", v1[i]);
 	
 	printf("\nmin array: ");
 	
 	for(int i =0; i< min-1;i++)
-		printf("%d ", v2[i]);
+		printf("%lf ", v2[i]);
 	
 	printf("\n");
 
-	qsort(randArr, 10, sizeof(int), cmpfunc);
+	qsort(randArr, 10, sizeof(double), cmpfunc);
 	printf("Sorted: ");
 	for (int i = 0;i < 10; i++)
-		printf("%d ", randArr[i]);
+		printf("%lf ", randArr[i]);
 	printf("\n");
-	printf("medium value: %d\n", ((int) randArr[5]+(int) randArr[4])/2);
+	printf("medium value: %lf\n", ((double) randArr[5]+(double) randArr[4])/(double) 2);
 
 	return 0;
 }
