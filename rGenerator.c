@@ -57,7 +57,7 @@ int main(void){
 	for (int i = 0;i < 10; i++)
 		printf("%d ", randArr[i]);
 	printf("\n");
-	printf("medium value: \n%d\n", randArr[5]);
+	printf("medium value: %d\n", ((int) randArr[5]+(int) randArr[4])/2);
 
 	return 0;
 }
