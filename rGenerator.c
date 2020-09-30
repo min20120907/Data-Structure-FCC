@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 
+typedef struct Frac{
+	int numerator;
+	int denominator;
+}frac;
+
 // Declare the compare funciton, that can convert all the types of elements into integer hashcode.
 int cmpfunc(const void * a, const void * b){
 	return (*(int*)a - *(int*)b);
