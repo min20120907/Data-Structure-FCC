@@ -21,6 +21,11 @@ void print_list(node_p head){
 	}
 }
 
+void concat_nodes(node_p a, node_p b){
+	a -> next = b;
+	b -> next = NULL;
+}
+
 int main(int argc, char** argv){
 	/*
 	node_p a = NULL;
@@ -40,16 +45,21 @@ int main(int argc, char** argv){
 	c -> data = 3.75;
 	c -> next = NULL;
 	*/
+	
 	node_p head = append_node(4323.123);
 	node_p a = append_node(1123.234);
 	node_p b = append_node(12342.41);
+
+	//concat_nodes(a, b);
+	//print_list(a);
 	
-	head -> next = a;
-	a -> next = b;
-	b -> next = NULL;
-
+	concat_nodes(head, a);
+	concat_nodes(a, b);
+	
+	//concat_nodes(head, a);
 	print_list(head);
-
+	
+	//free the memory
 	free(head);
 	free(a);
 	free(b);
