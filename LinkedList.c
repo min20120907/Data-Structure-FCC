@@ -1,10 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+
+//Define what is node_p and node
 typedef struct Node{
 	double data;
 	struct Node *next;
 }node, *node_p;
+
 
 node_p append_node(double member){
 	node_p tmp = (node_p) malloc(sizeof(node));
@@ -13,6 +16,7 @@ node_p append_node(double member){
 	return tmp;
 }
 
+//add head node
 node_p add_head_node (node_p head, node_p node_ptr){
 	node_p new_head;
 	new_head = head;
@@ -25,16 +29,28 @@ node_p add_head_node (node_p head, node_p node_ptr){
 	return new_head;
 }
 
+
+//get the length
 int count_list(node_p head){
 	node_p cur = head;
-	int counter = 0;
+	//if nothing inside
+	if(cur == NULL){
+		return 0;
+	}else if(cur->next==NULL){
+		return 1;
+	}else{
+	
 	while (cur!=NULL && cur->next!=NULL){
+		int counter = 1;
 		counter++;
 		cur = cur->next;
+		return counter;
 	}
-	return counter;
+
+	}
 }
 
+//find tail node
 node_p find_tail_node(node_p head){
 	node_p cur = head;
 
@@ -43,6 +59,7 @@ node_p find_tail_node(node_p head){
 	return head;	
 }
 
+//add Tail node
 node_p add_tail_node (node_p head, node_p node_ptr) {
 	node_p tail_ptr;
 	tail_ptr = find_tail_node(head);
@@ -52,7 +69,7 @@ node_p add_tail_node (node_p head, node_p node_ptr) {
 }
 
 
-
+//print function
 void print_list(node_p head){
 	node_p cur = head;
 	while(cur != NULL){
@@ -61,6 +78,7 @@ void print_list(node_p head){
 	}
 }
 
+//concatenate the nodes
 void concat_nodes(node_p a, node_p b){
 	a -> next = b;
 	b -> next = NULL;
