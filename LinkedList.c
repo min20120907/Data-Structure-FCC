@@ -13,6 +13,46 @@ node_p append_node(double member){
 	return tmp;
 }
 
+node_p add_head_node (node_p head, node_p node_ptr){
+	node_p new_head;
+	new_head = head;
+	
+	if(node_ptr != NULL){
+		node_ptr -> next = head;
+		new_head = node_ptr; 
+	}
+
+	return new_head;
+}
+
+int count_list(node_p head){
+	node_p cur = head;
+	int counter = 0;
+	while (cur!=NULL && cur->next!=NULL){
+		counter++;
+		cur = cur->next;
+	}
+	return counter;
+}
+
+node_p find_tail_node(node_p head){
+	node_p cur = head;
+
+	while(cur!= NULL && cur-> next != NULL)
+		cur = cur-> next;
+	return head;	
+}
+
+node_p add_tail_node (node_p head, node_p node_ptr) {
+	node_p tail_ptr;
+	tail_ptr = find_tail_node(head);
+	if(tail_ptr!=NULL)
+		tail_ptr -> next = node_ptr;
+	return tail_ptr;
+}
+
+
+
 void print_list(node_p head){
 	node_p cur = head;
 	while(cur != NULL){
@@ -55,7 +95,9 @@ int main(int argc, char** argv){
 	
 	concat_nodes(head, a);
 	concat_nodes(a, b);
-	
+
+	head = add_head_node(head, a);
+		
 	//concat_nodes(head, a);
 	print_list(head);
 	
