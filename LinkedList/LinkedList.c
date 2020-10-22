@@ -1,14 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "LinkList.h"
 
-
-//Define what is node_p and node
-typedef struct Node{
-	double data;
-	struct Node *next;
-}node, *node_p;
-
-
+//append node function
 node_p append_node(double member){
 	node_p tmp = (node_p) malloc(sizeof(node));
 	tmp -> data = member;
@@ -56,7 +50,7 @@ node_p find_tail_node(node_p head){
 
 	while(cur!= NULL && cur-> next != NULL)
 		cur = cur-> next;
-	return head;	
+	return cur;	
 }
 
 //add Tail node
@@ -65,7 +59,10 @@ node_p add_tail_node (node_p head, node_p node_ptr) {
 	tail_ptr = find_tail_node(head);
 	if(tail_ptr!=NULL)
 		tail_ptr -> next = node_ptr;
-	return tail_ptr;
+	if(head==NULL)
+		return node_ptr;
+	else
+		return head;
 }
 
 
@@ -84,8 +81,43 @@ void concat_nodes(node_p a, node_p b){
 	b -> next = NULL;
 }
 
+//get node index by a specific value
+node_p find_first(node_p head, double value){
+	node_p cur;
+	if(head==NULL){
+		return NULL;
+	}
+	cur = head;
+	while(cur!=NULL && cur->data!= value){
+		cur = cur->next;
+	}
+	return cur;
+}
+
+//Get node by index
+node_p getNode(node_p head, int idx){
+	node_p cur;
+	if(head==NULL || idx<0)
+		return NULL;
+	cur =head;
+	for(int i =0;i<idx;i++){
+		if(cur->next==NULL)
+			cur = cur->next;
+		else
+			return NULL;
+	}
+	return cur;
+}
+
+//insert between nodes
+//node_p insert_at(node_p, idx, node_p node3){
+//	return ;
+//}
+
+//remove node
+
 int main(int argc, char** argv){
-	/*
+	/*	
 	node_p a = NULL;
 	node_p b = NULL;
 	node_p c = NULL;
@@ -107,17 +139,17 @@ int main(int argc, char** argv){
 	node_p head = append_node(4323.123);
 	node_p a = append_node(1123.234);
 	node_p b = append_node(12342.41);
-
+	
 	//concat_nodes(a, b);
 	//print_list(a);
 	
 	concat_nodes(head, a);
 	concat_nodes(a, b);
-
-	head = add_head_node(head, a);
-		
-	//concat_nodes(head, a);
-	print_list(head);
+	
+	//head = add_head_node(head, append_node(124));
+	head = add_tail_node(head, append_node(123));	
+	//concat_nodes(a,b);
+	print_list(a);
 	
 	//free the memory
 	free(head);
