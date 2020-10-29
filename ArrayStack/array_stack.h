@@ -1,4 +1,5 @@
-#ifdef _array_stack_h
+#include "user_data.h"
+#ifndef _array_stack_h
 #define _array_stack_h
 
 typedef struct _ArrayStack{

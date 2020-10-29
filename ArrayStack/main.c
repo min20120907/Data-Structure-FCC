@@ -1,7 +1,7 @@
-#include "array_stack.h"
 #include <stdio.h>
+#include "array_stack.h"
 int main(int argc, char **argv){
-	ArrayStack stack = create_array_stack();
+	ArrayStackPtr stack = create_array_stack();
 
 	printf("Is full? %d: Is Empty? %d\n", is_full(stack), is_empty(stack));
 
