@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "array_stack.h"
+
 int main(int argc, char **argv){
 	ArrayStackPtr stack = create_array_stack();
 
