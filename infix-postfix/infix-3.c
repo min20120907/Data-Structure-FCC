@@ -57,10 +57,26 @@ char *to_postfix(const char *infix) {
         //top++;
         postfix[j++] = stack[top--];
     }
+    int l=0;
+    int spaced = 0;
+    int spaces = 0;
+    while (l<j){	
+	if((postfix[l]==' ' && postfix[l+1]==' ' )|| spaced) {
+		postfix[l] = postfix[l-1];
+		spaces++;
+		spaced = 1;
+		//printf("too much white spaces");
+	}
+	l++;
+    }
+    //printf("%d", spaces);
+    int m = 1;
+    for(;m<=spaces;m++) postfix[l-m] = 0;
+
     return postfix;
 }
 int main(int argc, char**argv){
-	puts(to_postfix("0-0+0-0-0-0-0-0-0"));
+	puts(to_postfix("(21+3*(2+2)-(4.3+21.79))"));
 }
 
 
