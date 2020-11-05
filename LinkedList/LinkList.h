@@ -1,4 +1,4 @@
-#ifdef _LinkList_h
+#ifndef _LinkList_h
 #define _LinkList_h
 
 typedef struct Node{

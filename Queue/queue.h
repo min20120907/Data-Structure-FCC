@@ -1,12 +1,14 @@
-#ifdef _queue_h
+#include "../LinkedList/LinkList.h"
+#ifndef _queue_h
 #define _queue_h
-struct _Queue {
-	UserData head;
-	UserData tail;
+typedef struct _Queue {
+	node_p head;
+	node_p tail;
 }queue, *queuePtr;
 
-queuePtr enqueue(queuePtr q);
-queuePtr dequeue(queuePtr q);
+queuePtr touchQueue();
+void enqueue(queuePtr q);
+void dequeue(queuePtr q);
 
 int is_full(queuePtr q);
 int is_empty(queuePtr q);
