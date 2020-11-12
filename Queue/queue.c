@@ -42,8 +42,8 @@ int main(int argc, char **argv){
 	// connect the nodes into the list
 	new1 -> next = new2;
 	new2 -> next = new3;
-	new3 -> next = new1;
-	//print_list(new1);
+	new3 -> next = NULL;
+	print_list(new1);
 	
 	// Set both of them into the same arraylist
 	test->head=new1;
