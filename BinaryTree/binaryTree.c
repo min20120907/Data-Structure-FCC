@@ -6,6 +6,8 @@ typedef struct _TreeNode {
 	struct _TreeNode *left, *right;
 }TreeNode, *TreeNodePtr;
 
+TreeNodePtr deleteRoot (TreeNodePtr T);
+
 // Allow a null pointer here.
 // Case 1: When root node is null.
 // Case 2: When the root node has value, same as key, do nothing, return itself.
