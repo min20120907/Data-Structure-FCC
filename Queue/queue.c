@@ -10,12 +10,26 @@ queuePtr touchQueue(){
 	return tmp;
 }
 
-void enqueue(queuePtr q){
-	q->tail = q->tail->next;
+void enqueue(queuePtr q, UserData udata){
+	node_p node = append_node();
+	if(!(q->head)) {
+		q->head = node;
+		q->tail = node;
+	}
+	q->tail->next = node;
+	q->tail = node;
 }
 
 void dequeue(queuePtr q){
-	q->head = q->head->next;
+	if(q->head == q->tail){
+		free(q->head);
+		q->head = NULL;
+		q->tail = NULL;
+	}else {
+		node_p curr = q->head;
+		q->head = curr->next;
+		free(curr);
+	}
 }
 
 int is_full(queuePtr q){
@@ -24,6 +38,10 @@ int is_full(queuePtr q){
 
 int is_empty(queuePtr q){
 	return q->tail->next==NULL&&q->head->next==NULL;
+}
+
+UserData peek(queuePtr q) {
+	return q->head->data;
 }
 
 int main(int argc, char **argv){
@@ -43,6 +61,7 @@ int main(int argc, char **argv){
 	new1 -> next = new2;
 	new2 -> next = new3;
 	new3 -> next = NULL;
+	printf("Created LinkedList: \n");
 	print_list(new1);
 	
 	// Set both of them into the same arraylist
@@ -50,16 +69,19 @@ int main(int argc, char **argv){
 	test->tail=new3;
 	
 	printf("head: %lf tail: %lf \n", test->head->data, test->tail->data);
+	printf("Peeking value: %lf\n", peek(test));
 	
 	// enqueuing
-	enqueue(test);
+	UserData tmp = 222.22;
+	enqueue(test, tmp);
 	printf("enqueuing......\n");
 	printf("head: %lf tail: %lf \n", test->head->data, test->tail->data);
+	printf("Peeking value: %lf\n", peek(test));
 	
 	// dequeuing
 	printf("dequeuing......\n");
 	dequeue(test);
 	printf("head: %lf tail: %lf \n", test->head->data, test->tail->data);
-	
+	printf("Peeking value: %lf\n", peek(test));
 	return 0;
 }
