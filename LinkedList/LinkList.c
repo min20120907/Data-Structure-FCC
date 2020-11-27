@@ -109,13 +109,19 @@ node_p getNode(node_p head, int idx){
 	return cur;
 }
 
-node_p removeNode(node_p head, UserData udata) {
+node_p removeNode(node_p head, double udata) {
 	node_p cur;
 	cur = head;
-	if (cur->data == udata) {
-		cur = cur->next;
+	if (cur->next==NULL) return cur;
+	else if(cur->data==udata) return cur->next;
+	else if (cur->next->data == udata) {
+		cur->next = cur->next->next;
+	}else{
+		removeNode(cur->next, udata);
 	}
+	return cur;
 }
+
 //insert between nodes
 //node_p insert_at(node_p, idx, node_p node3){
 //	return ;

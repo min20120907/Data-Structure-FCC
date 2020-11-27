@@ -29,18 +29,14 @@ int main(int argc, char** argv){
 	//concat_nodes(a, b);
 	//print_list(a);
 	
-	concat_nodes(head, a);
-	concat_nodes(a, b);
-	
-	//head = add_head_node(head, append_node(124));
-	head = add_tail_node(head, append_node(123));	
+		
+	head = add_tail_node(head, a);
+	head = add_tail_node(head, b);
+	head = removeNode(head, (double) 12342.41);
 	//concat_nodes(a,b);
-	print_list(a);
+	print_list(head);
 	
 	//free the memory
-	free(head);
-	free(a);
-	free(b);
 
 	return 0;
 }
