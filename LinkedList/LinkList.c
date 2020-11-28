@@ -112,11 +112,15 @@ node_p getNode(node_p head, int idx){
 node_p removeNode(node_p head, double udata) {
 	node_p cur;
 	cur = head;
+	// if the list is empty, then return itself.
 	if (cur->next==NULL) return cur;
+	// or if the head is the found node, then return next
 	else if(cur->data==udata) return cur->next;
+	// if this is in the between, then the next is the next to the next.
 	else if (cur->next->data == udata) {
 		cur->next = cur->next->next;
 	}else{
+		// otherwise find it again
 		removeNode(cur->next, udata);
 	}
 	return cur;
