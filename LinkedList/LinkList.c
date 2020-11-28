@@ -126,6 +126,25 @@ node_p removeNode(node_p head, double udata) {
 	return cur;
 }
 
+node_p removeNodeByIndex (node_p head, int idx) {
+	node_p cur = head;
+	if (idx == 0) {
+		cur = cur->next;
+		return cur;
+	}
+	else if (cur->next == NULL) return cur;
+	else if (cur == NULL) return NULL;
+	else {
+		node_p tmp = cur;
+		for (int i = 0; i<idx;i++){
+			tmp = tmp->next;
+		}
+		cur->next = tmp;
+		return cur;
+	}
+	return NULL;
+}
+
 //insert between nodes
 //node_p insert_at(node_p, idx, node_p node3){
 //	return ;
