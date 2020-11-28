@@ -132,8 +132,11 @@ node_p removeNodeByIndex (node_p head, int idx) {
 		cur = cur->next;
 		return cur;
 	}
+	// if nothing next to the linkedlist, then return itself
 	else if (cur->next == NULL) return cur;
+	// if list is empty, return null
 	else if (cur == NULL) return NULL;
+	// otherwise
 	else {
 		node_p tmp = cur;
 		for (int i = 0; i<idx;i++){
