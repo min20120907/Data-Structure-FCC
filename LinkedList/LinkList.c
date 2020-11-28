@@ -142,7 +142,7 @@ node_p removeNodeByIndex (node_p head, int idx) {
 		for (int i = 0; i<idx;i++){
 			tmp = tmp->next;
 		}
-		cur->next = tmp;
+		cur = tmp;
 		return cur;
 	}
 	return NULL;

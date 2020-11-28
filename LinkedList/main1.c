@@ -32,7 +32,7 @@ int main(int argc, char** argv){
 		
 	head = add_tail_node(head, a);
 	head = add_tail_node(head, b);
-	head = removeNode(head, (double) 12342.41);
+	head = removeNodeByIndex(head, 2);
 	//concat_nodes(a,b);
 	print_list(head);
 	

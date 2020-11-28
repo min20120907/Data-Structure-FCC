@@ -17,4 +17,5 @@ node_p find_first();
 node_p getNode();
 node_p insert_at(node_p head, int idx, node_p node3);
 node_p removeNode(node_p head, double udata);
+node_p removeNodeByIndex (node_p head, int idx);
 #endif
