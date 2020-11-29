@@ -136,13 +136,21 @@ node_p removeNodeByIndex (node_p head, int idx) {
 	else if (cur->next == NULL) return cur;
 	// if list is empty, return null
 	else if (cur == NULL) return NULL;
+	// if oversize return it self.
+	else if (idx > count_list(head)) return cur;
 	// otherwise
-	else {
-		node_p tmp = cur;
+	else{
+		// create a temporary variable to indicate the node, which is scanned currently.
+		node_p tmp = malloc(sizeof(node));
+		tmp = head;
 		for (int i = 0; i<idx;i++){
-			tmp = tmp->next;
+			// iterate to the next node.
+			tmp = tmp ->next;
 		}
-		cur = tmp;
+		// find the target node "tmp".
+		cur = removeNode(head, tmp->data);
+		// deallocate the tmp memory address
+		free(tmp);
 		return cur;
 	}
 	return NULL;
