@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkList.h"
+#include "LinkList.h" 
 
 int main(int argc, char **argv)
 {
@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 	head = add_tail_node(head, b);
 	printf("Before:\n");
 	print_list(head);
+	printf("Remove the index of %d\n", 1);
 	head = removeNodeByIndex(head, 1);
 	// concat_nodes(a,b);
 	printf("After:\n");

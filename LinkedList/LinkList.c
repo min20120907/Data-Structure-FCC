@@ -42,6 +42,7 @@ int count_list(node_p head){
 	}
 
 	}
+	return 1;
 }
 
 //find tail node
