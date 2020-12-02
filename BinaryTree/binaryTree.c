@@ -70,15 +70,9 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 	else if(key > T->key) tmp->right = deleteRoot(tmp->right, key);
 
 	else{
-		if(T->left == NULL){
-			tmp = T->right;
-			free(T);
-			return tmp;
-		}else if(T->right == NULL) {
-			tmp = T->left;
-			free(T);
-			return tmp;
-		}
+		if(T->left == NULL) tmp = T->right;
+		else if(T->right == NULL) tmp = T->left;
+		
 		tmp = getMin(T->right);
 		tmp->key = tmp->key;
 		tmp->right = deleteRoot(T->right, tmp->key);
@@ -126,7 +120,7 @@ int main(int argc, char **argv)
 	if (argc > 1)
 	{
 
-		for (i = 1; i < argc; i++)
+		for (i = 2; i < argc; i++)
 		{
 			double d;
 			sscanf(argv[i], "%lf", &d);
