@@ -20,24 +20,49 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 		// Remove the leaf node
 		while (tmp->left != NULL && tmp->right != NULL)
 		{
-			// Right Leaf
+			// Right Leaf case 1
 			if (tmp->right->key == key && tmp->right->left == NULL && tmp->right->right == NULL)
 			{
 				tmp->right = NULL;
 				break;
 			}
-			// Left leaf
+			// Left leaf case 1
 			else if (tmp->left->key == key && tmp->left->left == NULL && tmp->left->right == NULL)
 			{
 				tmp->left = NULL;
+				break;
+			}
+			// Case 2.1 With single subtree
+			// Right single subtree
+			else if (tmp->left->key == key)
+			{
+				if (tmp->left->left != NULL && tmp->left->right == NULL)
+				{
+					tmp->left = tmp->left->left;
+				}
+				else if (tmp->left->left == NULL && tmp->left->right != NULL)
+				{
+					tmp->left = tmp->left->right;
+				}
+				break;
+			}
+			// Left subtree
+			else if (tmp->right->key == key)
+			{
+				if (tmp->right->left != NULL && tmp->right->right == NULL)
+				{
+					tmp->right = tmp->right->left;
+				}
+				else if (tmp->right->left == NULL && tmp->right->right != NULL)
+				{
+					tmp->right = tmp->right->right;
+				}
 				break;
 			}
 
 			tmp->left = tmp->left->left;
 			tmp->right = tmp->right->right;
 		}
-
-		// case 2
 	}
 	return tmp;
 }
