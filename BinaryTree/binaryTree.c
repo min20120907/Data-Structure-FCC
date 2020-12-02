@@ -55,74 +55,33 @@ void printRoot(TreeNodePtr T)
 	printRoot(T->left);
 	printRoot(T->right);
 }
+TreeNodePtr getMin(TreeNodePtr T){
+	TreeNodePtr tmp = T;
+	while(tmp && tmp->left != NULL) tmp = tmp->left;
+	return tmp;
+}
 TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 {
+	if (T==NULL) return T;
 	TreeNodePtr tmp;
-	// case 0
-	if (isInBST(T, key))
-		return T;
-	else
-	{
-		tmp = T;
-		// case 1
-		// Remove the leaf node
-		while (tmp->left != NULL && tmp->right != NULL)
-		{
-			// Right Leaf case 1
-			if (tmp->right->key == key && tmp->right->left == NULL && tmp->right->right == NULL)
-			{
-				tmp->right = NULL;
-				break;
-			}
-			// Left leaf case 1
-			else if (tmp->left->key == key && tmp->left->left == NULL && tmp->left->right == NULL)
-			{
-				tmp->left = NULL;
-				break;
-			}
-			// Case 2.1 With single subtree
-			// Right single subtree
-			else if (tmp->left->key == key)
-			{
-				if (tmp->left->left != NULL && tmp->left->right == NULL)
-				{
-					tmp->left = tmp->left->left;
-				}
-				else if (tmp->left->left == NULL && tmp->left->right != NULL)
-				{
-					tmp->left = tmp->left->right;
-				}
-				else
-				{
-					// Case 3 With both subtrees
-					tmp->left->key = tmp->right->left->key;
-					tmp->left->left = tmp->right->left->right;
-				}
-				break;
-			}
-			// 2.2 Left subtree
-			else if (tmp->right->key == key)
-			{
-				if (tmp->right->left != NULL && tmp->right->right == NULL)
-				{
-					tmp->right = tmp->right->left;
-				}
-				else if (tmp->right->left == NULL && tmp->right->right != NULL)
-				{
-					tmp->right = tmp->right->right;
-				}
-				else
-				{
-					// Case 3 With both subtrees
-					tmp->right->key = tmp->right->left->key;
-					tmp->right->left = tmp->right->left->right;
-				}
-				break;
-			}
+	tmp = T;
+	
+	if(key < T->key) tmp->left = deleteRoot(tmp->left, key);
+	else if(key > T->key) tmp->right = deleteRoot(tmp->right, key);
 
-			tmp->left = tmp->left->left;
-			tmp->right = tmp->right->right;
+	else{
+		if(T->left == NULL){
+			tmp = T->right;
+			free(T);
+			return tmp;
+		}else if(T->right == NULL) {
+			tmp = T->left;
+			free(T);
+			return tmp;
 		}
+		tmp = getMin(T->right);
+		tmp->key = tmp->key;
+		tmp->right = deleteRoot(T->right, tmp->key);
 	}
 	return tmp;
 }
@@ -191,8 +150,8 @@ int main(int argc, char **argv)
 	printf("Before:\n");
 	printRoot(root);
 	printf("\n");
-	printf("removing 3...\n");
-	printRoot(deleteRoot(root, 3));
+	printf("removing %lf...\n", k);
+	printRoot(deleteRoot(root, k));
 	printf("\n");
 	return 0;
 }
