@@ -70,8 +70,16 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 	else if(key > T->key) tmp->right = deleteRoot(tmp->right, key);
 
 	else{
-		if(T->left == NULL) tmp = T->right;
-		else if(T->right == NULL) tmp = T->left;
+		if(T->left == NULL) {
+			tmp = T->right;
+			free(T);
+			return tmp;
+		}
+		else if(T->right == NULL){
+			tmp = T->left;
+			free(T);
+			return tmp;
+		} 
 		
 		tmp = getMin(T->right);
 		tmp->key = tmp->key;
