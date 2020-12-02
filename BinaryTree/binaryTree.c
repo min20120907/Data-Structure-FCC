@@ -7,6 +7,9 @@ typedef struct _TreeNode
 	struct _TreeNode *left, *right;
 } TreeNode, *TreeNodePtr;
 
+int getLevel()
+{
+}
 TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 {
 	TreeNodePtr tmp;
@@ -44,9 +47,16 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 				{
 					tmp->left = tmp->left->right;
 				}
+				else
+				{
+					// Case 3 With both subtrees
+					tmp = tmp->left;
+					tmp->left->key = tmp->left->right->key;
+					
+				}
 				break;
 			}
-			// Left subtree
+			// 2.2 Left subtree
 			else if (tmp->right->key == key)
 			{
 				if (tmp->right->left != NULL && tmp->right->right == NULL)
@@ -56,6 +66,10 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 				else if (tmp->right->left == NULL && tmp->right->right != NULL)
 				{
 					tmp->right = tmp->right->right;
+				}
+				else
+				{
+					// Case 3 With both subtrees
 				}
 				break;
 			}
