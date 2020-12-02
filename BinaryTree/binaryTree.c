@@ -48,22 +48,12 @@ int isInBST(TreeNodePtr root, double key)
 	// || isInBST(root->right, key);
 }
 
-
-void printRoot(TreeNodePtr T){
-	TreeNodePtr tmp, tmp_l, tmp_r;
-	double *arr = malloc(sizeof(double));
-	tmp = T;
-	tmp_l = T->left;
-	tmp_r = T->right;
-	while(tmp!=NULL){
-		while(tmp_l!=NULL){
-			while(tmp_r!=NULL){
-				tmp_l = tmp_l->left;
-			}
-			tmp_r = tmp_r->right;
-		}
-	}
-	printRoot(T);
+void printRoot(TreeNodePtr T)
+{
+	if(T==NULL) return;
+	else printf("%lf::", T->key);
+	printRoot(T->left);
+	printRoot(T->right);
 }
 TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 {
@@ -191,11 +181,18 @@ int main(int argc, char **argv)
 	if (isInBST(root, k))
 	{
 		printf("Found \n");
-		printRoot(root);
+
 	}
 	else
 	{
 		printf("Not Found \n");
 	}
+	
+	printf("Before:\n");
+	printRoot(root);
+	printf("\n");
+	printf("removing 3...\n");
+	printRoot(deleteRoot(root, 3));
+	printf("\n");
 	return 0;
 }
