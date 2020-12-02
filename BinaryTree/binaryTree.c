@@ -9,6 +9,61 @@ typedef struct _TreeNode
 
 int getLevel()
 {
+	return 0;
+}
+// Give a value, test whether it is BST.
+// Case 1: If the given key is NULL, return false.
+// Case 2: If the given key is key in the root node, return true.
+// Case 3: Whether it is in the left tree, do the recursive call, and return true.
+// Case 4: Whether it is in the right tree, do the recursive call, and return true.
+// Case 5: If the given key is different, then return false.
+int isInBST(TreeNodePtr root, double key)
+{
+	if (root == NULL)
+	{ // Case 1
+		return 0;
+	}
+	else if (root->key == key)
+	{ // Case 2
+		return 1;
+	}
+	else if (isInBST(root->left, key))
+	{ // Case 3
+		return 1;
+	}
+	else if (isInBST(root->right, key))
+	{ // Case 4
+		return 1;
+	}
+	else
+	{ // Case 5
+		return 0;
+	}
+
+	// Single Line Expression (based on logic boolean calculation)
+	// return
+	// root != NULL
+	// && (root->key == key)
+	// || isInBST(root->left, key)
+	// || isInBST(root->right, key);
+}
+
+
+void printRoot(TreeNodePtr T){
+	TreeNodePtr tmp, tmp_l, tmp_r;
+	double *arr = malloc(sizeof(double));
+	tmp = T;
+	tmp_l = T->left;
+	tmp_r = T->right;
+	while(tmp!=NULL){
+		while(tmp_l!=NULL){
+			while(tmp_r!=NULL){
+				tmp_l = tmp_l->left;
+			}
+			tmp_r = tmp_r->right;
+		}
+	}
+	printRoot(T);
 }
 TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 {
@@ -113,42 +168,6 @@ TreeNodePtr addToBST(TreeNodePtr root, double key)
 	}
 	return root;
 }
-// Give a value, test whether it is BST.
-// Case 1: If the given key is NULL, return false.
-// Case 2: If the given key is key in the root node, return true.
-// Case 3: Whether it is in the left tree, do the recursive call, and return true.
-// Case 4: Whether it is in the right tree, do the recursive call, and return true.
-// Case 5: If the given key is different, then return false.
-int isInBST(TreeNodePtr root, double key)
-{
-	if (root == NULL)
-	{ // Case 1
-		return 0;
-	}
-	else if (root->key == key)
-	{ // Case 2
-		return 1;
-	}
-	else if (isInBST(root->left, key))
-	{ // Case 3
-		return 1;
-	}
-	else if (isInBST(root->right, key))
-	{ // Case 4
-		return 1;
-	}
-	else
-	{ // Case 5
-		return 0;
-	}
-
-	// Single Line Expression (based on logic boolean calculation)
-	// return
-	// root != NULL
-	// && (root->key == key)
-	// || isInBST(root->left, key)
-	// || isInBST(root->right, key);
-}
 
 int main(int argc, char **argv)
 {
@@ -172,7 +191,7 @@ int main(int argc, char **argv)
 	if (isInBST(root, k))
 	{
 		printf("Found \n");
-		
+		printRoot(root);
 	}
 	else
 	{
