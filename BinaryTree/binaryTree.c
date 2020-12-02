@@ -7,11 +7,37 @@ typedef struct _TreeNode
 	struct _TreeNode *left, *right;
 } TreeNode, *TreeNodePtr;
 
-TreeNodePtr deleteRoot(TreeNodePtr T, double key){
+TreeNodePtr deleteRoot(TreeNodePtr T, double key)
+{
 	TreeNodePtr tmp;
-	if (isInBST(T, key)) return T;
-	else {
-		
+	// case 0
+	if (isInBST(T, key))
+		return T;
+	else
+	{
+		tmp = T;
+		// case 1
+		// Remove the leaf node
+		while (tmp->left != NULL && tmp->right != NULL)
+		{
+			// Right Leaf
+			if (tmp->right->key == key && tmp->right->left == NULL && tmp->right->right == NULL)
+			{
+				tmp->right = NULL;
+				break;
+			}
+			// Left leaf
+			else if (tmp->left->key == key && tmp->left->left == NULL && tmp->left->right == NULL)
+			{
+				tmp->left = NULL;
+				break;
+			}
+
+			tmp->left = tmp->left->left;
+			tmp->right = tmp->right->right;
+		}
+
+		// case 2
 	}
 	return tmp;
 }
