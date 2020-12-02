@@ -50,9 +50,8 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 				else
 				{
 					// Case 3 With both subtrees
-					tmp = tmp->left;
 					tmp->left->key = tmp->left->right->key;
-					
+					tmp->left->right = tmp->left->right->left;
 				}
 				break;
 			}
@@ -70,6 +69,8 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 				else
 				{
 					// Case 3 With both subtrees
+					tmp->right->key = tmp->right->left->key;
+					tmp->right->left = tmp->right->left->right;
 				}
 				break;
 			}
