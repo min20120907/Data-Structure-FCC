@@ -50,8 +50,8 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 				else
 				{
 					// Case 3 With both subtrees
-					tmp->left->key = tmp->left->right->key;
-					tmp->left->right = tmp->left->right->left;
+					tmp->left->key = tmp->right->left->key;
+					tmp->left->left = tmp->right->left->right;
 				}
 				break;
 			}
@@ -172,6 +172,7 @@ int main(int argc, char **argv)
 	if (isInBST(root, k))
 	{
 		printf("Found \n");
+		
 	}
 	else
 	{
