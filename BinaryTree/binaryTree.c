@@ -30,7 +30,7 @@ void printGivenLevel(TreeNodePtr root, int level)
 {
 	if (root == NULL)
 		return;
-	if (level == 1)
+	if (level == 1&&root!=NULL)
 		printf("%lf ", root->key);
 	else if (level > 1)
 	{
