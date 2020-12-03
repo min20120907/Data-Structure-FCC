@@ -22,7 +22,7 @@ int height(TreeNodePtr T)
 	// to the right.
 	right_side = height(T->right);
 
-	return (height(left_side) > height(right_side) ? left_side : right_side) + 1;
+	return (left_side > right_side ? left_side : right_side) + 1;
 }
 
 /* Print nodes at a given level */
