@@ -7,25 +7,23 @@ typedef struct _TreeNode
 	struct _TreeNode *left, *right;
 } TreeNode, *TreeNodePtr;
 
-int height(TreeNodePtr node)
+// Height Function
+int height(TreeNodePtr T)
 {
-	if (node == NULL)
+	// if the tree is empty, then return 0
+	if (T == NULL)
 		return 0;
-	else
-	{
-		int left_side;
-		int right_side;
-		left_side = height(node->left);
-		right_side = height(node->right);
-		if (left_side > right_side)
-		{
-			return left_side + 1;
-		}
-		else
-			return right_side + 1;
-	}
-}
+	// Else do the calculation
 
+	int left_side;
+	int right_side;
+	// Do the recursion call to the left
+	left_side = height(T->left);
+	// to the right.
+	right_side = height(T->right);
+
+	return (height(left_side) > height(right_side) ? left_side : right_side) + 1;
+}
 
 /* Print nodes at a given level */
 void printGivenLevel(TreeNodePtr root, int level)
@@ -52,8 +50,7 @@ void printLevelOrder(TreeNodePtr root)
 	}
 }
 
-
-int getLevel(int n)
+int getCompleteTreeLevel(int n)
 {
 	int lvl = 0;
 	while (n % 2 == 0)
@@ -142,7 +139,6 @@ TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 			free(T);
 			return tmp;
 		}
-
 		tmp = getMin(T->right);
 		tmp->key = tmp->key;
 		tmp->right = deleteRoot(T->right, tmp->key);
