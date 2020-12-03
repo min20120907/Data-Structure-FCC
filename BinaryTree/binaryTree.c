@@ -7,9 +7,61 @@ typedef struct _TreeNode
 	struct _TreeNode *left, *right;
 } TreeNode, *TreeNodePtr;
 
-int getLevel()
+int height(TreeNodePtr node)
 {
-	return 0;
+	if (node == NULL)
+		return 0;
+	else
+	{
+		int left_side;
+		int right_side;
+		left_side = height(node->left);
+		right_side = height(node->right);
+		if (left_side > right_side)
+		{
+			return left_side + 1;
+		}
+		else
+			return right_side + 1;
+	}
+}
+
+
+/* Print nodes at a given level */
+void printGivenLevel(TreeNodePtr root, int level)
+{
+	if (root == NULL)
+		return;
+	if (level == 1)
+		printf("%lf ", root->key);
+	else if (level > 1)
+	{
+		printGivenLevel(root->left, level - 1);
+		printGivenLevel(root->right, level - 1);
+	}
+}
+/* Function to line by line print level order traversal a tree*/
+void printLevelOrder(TreeNodePtr root)
+{
+	int h = height(root);
+	int i;
+	for (i = 1; i <= h; i++)
+	{
+		printGivenLevel(root, i);
+		printf("\n");
+	}
+}
+
+
+int getLevel(int n)
+{
+	int lvl = 0;
+	while (n % 2 == 0)
+	{
+		lvl++;
+		n /= 2;
+	}
+	return lvl;
 }
 // Give a value, test whether it is BST.
 // Case 1: If the given key is NULL, return false.
@@ -50,37 +102,47 @@ int isInBST(TreeNodePtr root, double key)
 
 void printRoot(TreeNodePtr T)
 {
-	if(T==NULL) return;
-	else printf("%lf::", T->key);
+	if (T == NULL)
+		return;
+	else
+		printf("%lf::", T->key);
 	printRoot(T->left);
 	printRoot(T->right);
 }
-TreeNodePtr getMin(TreeNodePtr T){
+TreeNodePtr getMin(TreeNodePtr T)
+{
 	TreeNodePtr tmp = T;
-	while(tmp && tmp->left != NULL) tmp = tmp->left;
+	while (tmp && tmp->left != NULL)
+		tmp = tmp->left;
 	return tmp;
 }
 TreeNodePtr deleteRoot(TreeNodePtr T, double key)
 {
-	if (T==NULL) return T;
-	TreeNodePtr tmp;
-	tmp = T;
-	
-	if(key < T->key) tmp->left = deleteRoot(tmp->left, key);
-	else if(key > T->key) tmp->right = deleteRoot(tmp->right, key);
+	if (T == NULL)
+		return T;
+	TreeNodePtr tmp = malloc(sizeof(TreeNode));
+	*tmp = *T;
 
-	else{
-		if(T->left == NULL) {
+	if (key < T->key)
+		tmp->left = deleteRoot(tmp->left, key);
+	else if (key > T->key)
+		tmp->right = deleteRoot(tmp->right, key);
+
+	else
+	{
+		if (T->left == NULL)
+		{
 			tmp = T->right;
 			free(T);
 			return tmp;
 		}
-		else if(T->right == NULL){
+		else if (T->right == NULL)
+		{
 			tmp = T->left;
 			free(T);
 			return tmp;
-		} 
-		
+		}
+
 		tmp = getMin(T->right);
 		tmp->key = tmp->key;
 		tmp->right = deleteRoot(T->right, tmp->key);
@@ -142,18 +204,19 @@ int main(int argc, char **argv)
 	if (isInBST(root, k))
 	{
 		printf("Found \n");
-
 	}
 	else
 	{
 		printf("Not Found \n");
 	}
-	
+
 	printf("Before:\n");
 	printRoot(root);
 	printf("\n");
 	printf("removing %lf...\n", k);
 	printRoot(deleteRoot(root, k));
 	printf("\n");
+	printf("The level of the BST is: %d\n", getLevel(k));
+	printLevelOrder(root);
 	return 0;
 }
