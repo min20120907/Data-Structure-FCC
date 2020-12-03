@@ -212,7 +212,7 @@ int main(int argc, char **argv)
 	printf("removing %lf...\n", k);
 	printRoot(deleteRoot(root, k));
 	printf("\n");
-	printf("The level of the BST is: %d\n", getLevel(k));
+	// printf("The level of the BST is: %d\n", getLevel(k));
 	printLevelOrder(root);
 	return 0;
 }
