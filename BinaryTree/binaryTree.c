@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct _TreeNode
 {
@@ -24,7 +25,11 @@ int height(TreeNodePtr T)
 
 	return (left_side > right_side ? left_side : right_side) + 1;
 }
+double *toArray() {
+	double *tmp;
 
+	return tmp;
+}
 /* Print nodes at a given level */
 void printGivenLevel(TreeNodePtr root, int level)
 {
@@ -48,6 +53,11 @@ void printLevelOrder(TreeNodePtr root)
 		printGivenLevel(root, i);
 		printf("\n");
 	}
+}
+
+int getLevel(TreeNodePtr T, double key) {
+
+	return 0;
 }
 
 int getCompleteTreeLevel(int n)
@@ -96,6 +106,8 @@ int isInBST(TreeNodePtr root, double key)
 	// || isInBST(root->left, key)
 	// || isInBST(root->right, key);
 }
+
+
 
 void printRoot(TreeNodePtr T)
 {
