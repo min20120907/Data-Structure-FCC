@@ -8,6 +8,18 @@ typedef struct _TreeNode
 	struct _TreeNode *left, *right;
 } TreeNode, *TreeNodePtr;
 
+typedef void (*visit_func) (TreeNodePtr node);
+
+void preOrder(TreeNodePtr root, visit_func v){
+	if(root == NULL)return;
+	/* visit code*/
+	v(root);
+	/* traversing */
+	preOrder(root->left, v);
+	preOrder(root->right, v);
+
+}
+
 // Height Function
 int height(TreeNodePtr T)
 {
@@ -25,32 +37,34 @@ int height(TreeNodePtr T)
 
 	return (left_side > right_side ? left_side : right_side) + 1;
 }
-double *toArray() {
+
+double *toArray(TreeNodePtr T) {
 	double *tmp;
+	tmp = malloc(sizeof(double) * height(T));
 
 	return tmp;
 }
 /* Print nodes at a given level */
-void printGivenLevel(TreeNodePtr root, int level)
+void printGivenLevel(TreeNodePtr T, int level)
 {
-	if (root == NULL)
+	if (T == NULL)
 		return;
-	if (level == 1&&root!=NULL)
-		printf("%lf ", root->key);
+	if (level == 1&&T!=NULL&&T->key!=0)
+		printf("%.00lf ", T->key);
 	else if (level > 1)
 	{
-		printGivenLevel(root->left, level - 1);
-		printGivenLevel(root->right, level - 1);
+		printGivenLevel(T->left, level - 1);
+		printGivenLevel(T->right, level - 1);
 	}
 }
 /* Function to line by line print level order traversal a tree*/
-void printLevelOrder(TreeNodePtr root)
+void printLevelOrder(TreeNodePtr T)
 {
-	int h = height(root);
+	int h = height(T);
 	int i;
 	for (i = 1; i <= h; i++)
 	{
-		printGivenLevel(root, i);
+		printGivenLevel(T, i);
 		printf("\n");
 	}
 }
@@ -111,12 +125,11 @@ int isInBST(TreeNodePtr root, double key)
 
 void printRoot(TreeNodePtr T)
 {
-	if (T == NULL)
-		return;
+	if (T == NULL||T->key==(double)0)
+		printf("@::");
 	else
 		printf("%lf::", T->key);
-	printRoot(T->left);
-	printRoot(T->right);
+
 }
 TreeNodePtr getMin(TreeNodePtr T)
 {
@@ -219,10 +232,11 @@ int main(int argc, char **argv)
 	}
 
 	printf("Before:\n");
-	printRoot(root);
+	preOrder(root, printRoot);
 	printf("\n");
-	printf("removing %lf...\n", k);
-	printRoot(deleteRoot(root, k));
+	printf("removing %.00lf...\n", k);
+	deleteRoot(root, k);
+	preOrder(root, printRoot);
 	printf("\n");
 	printf("The height of the tree is: %d\n", height(root));
 	// printf("The level of the BST is: %d\n", getLevel(k));
