@@ -212,6 +212,7 @@ int main(int argc, char **argv)
 	printf("removing %lf...\n", k);
 	printRoot(deleteRoot(root, k));
 	printf("\n");
+	printf("The height of the tree is: %d\n", height(root));
 	// printf("The level of the BST is: %d\n", getLevel(k));
 	printLevelOrder(root);
 	return 0;
