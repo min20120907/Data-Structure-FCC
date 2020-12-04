@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkList.h"
+#include "LinkList.h" 
 
-int main(int argc, char** argv){
+int main(int argc, char **argv)
+{
 	/*	
 	node_p a = NULL;
 	node_p b = NULL;
@@ -21,21 +22,29 @@ int main(int argc, char** argv){
 	c -> data = 3.75;
 	c -> next = NULL;
 	*/
-	
+
 	node_p head = append_node(4323.123);
 	node_p a = append_node(1123.234);
 	node_p b = append_node(12342.41);
-	
+
 	//concat_nodes(a, b);
 	//print_list(a);
-	
-		
+
 	head = add_tail_node(head, a);
 	head = add_tail_node(head, b);
+<<<<<<< HEAD
 	head = removeNodeByIndex(head, 1);
 	//concat_nodes(a,b);
+=======
+	printf("Before:\n");
+>>>>>>> 9185a398199bc841c036ea183ce7d71c7c3c161b
 	print_list(head);
-	
+	printf("Remove the index of %d\n", 1);
+	head = removeNodeByIndex(head, 1);
+	// concat_nodes(a,b);
+	printf("After:\n");
+	print_list(head);
+
 	//free the memory
 
 	return 0;
