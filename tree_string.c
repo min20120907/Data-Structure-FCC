@@ -1,75 +1,90 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct _intTreeNode {
-    int value;
-    struct _intTreeNode *left, *right;
+typedef struct _intTreeNode
+{
+	int value;
+	struct _intTreeNode *left, *right;
 } intTreeNode, *intTreeNodePtr;
 void printInorder(intTreeNodePtr node)
 {
-    if (node == NULL)
-        return;
-    /* first recur on left child */
-    printInorder(node->left);
-    /* then print the data of node */
-    printf("%d ", node->value);
-    /* now recur on right child */
-    printInorder(node->right);
+	if (node == NULL)
+		return;
+	/* first recur on left child */
+	printInorder(node->left);
+	/* then print the data of node */
+	printf("%d ", node->value);
+	/* now recur on right child */
+	printInorder(node->right);
 }
-intTreeNodePtr buildTree(int *a,int len){
+intTreeNodePtr buildTree(char **a, int len)
+{
 
-if(a[0]==-1){
-return NULL;
-}else{
-intTreeNodePtr root = (intTreeNodePtr)malloc(sizeof(intTreeNode));
+		intTreeNodePtr root = (intTreeNodePtr)malloc(sizeof(intTreeNode));
 
-root->value = a[0];
-for(int i = 0; i < len ;i++){
-a[i] = a[i+1];
-}
-root->left = buildTree(a,len-1);
-for(int j = 0; j < len ;j++){
-a[j] = a[j+1];
-}
-root->right = buildTree(a,len-1);
-for(int j = 0; j < len ;j++){
-a[j] = a[j+1];
+		root->value = atoi(a[0]);
+		for (int i = 0; i < len; i++)
+		{
+			a[i] = a[i + 1];
+		}
+		root->left = buildTree(a, len - 1);
+		for (int j = 0; j < len; j++)
+		{
+			a[j] = a[j + 1];
+		}
+		root->right = buildTree(a, len - 1);
+		for (int j = 0; j < len; j++)
+		{
+			a[j] = a[j + 1];
+		}
+
+		return root;
+	
 }
 
-return root;
-}
+intTreeNodePtr buildTreeFromString(char *ss)
+{
+	char tmp[2] = {'\0', '\0'};
+	if (!strcmp(ss, ""))
+	{
+		return NULL;
+	}
+	else
+	{
+		char **a = (char**) malloc(sizeof(char)*strlen(ss));
 
-}
+		int x, y = 0;
+		char s[101];
+		strcpy(s, ss);
+		for (x = 0; x < strlen(ss); x++)
+		{
 
-intTreeNodePtr buildTreeFromString(char *ss){
-char tmp[2]={'\0','\0'};
-if(!strcmp(ss,"")){
-return NULL;
-}else{
-char *a[strlen(ss)];
-int x,y = 0;
-char s[101];
-strcpy(s,ss);
-for(x=0; x<strlen(ss);x++){
-
-if(s[x]==' '){
-y++;
-}else{
-if(s[x]!='@'){
-tmp[0] =s[x];
-a[y] = strcat(a[y],tmp);
-}else{
-a[y] = "";
+			if (s[x] == ' ')
+			{
+				y++;
+			}
+			else
+			{
+				if (s[x] != '@')
+				{
+					tmp[0] = s[x];
+					strcat(a[y],tmp);
+					//printf("%c",s[x]);
+				}
+				else
+				{
+					//a[y] = "";
+				}
+			}
+		}
+		//printf("%s is first number\n", a[1]);
+		//return buildTree(a,y);
+		//return NULL;
+	}
+	return NULL;
 }
-}
-}
-//printf("%s is first number\n", a[0]);
-//return buildTree(a,y);
-//return NULL;
-}
-return NULL;
-}
-int main(){
+int main()
+{
 	printInorder(buildTreeFromString("20 @ @"));
 	printf("\n");
 	printInorder(buildTreeFromString("20 10 @ @ @"));
@@ -84,6 +99,5 @@ int main(){
 	printf("\n");
 	//printInorder(buildTreeFromString(""));
 	//printf("\n");
-        return 0;
+	return 0;
 }
-
