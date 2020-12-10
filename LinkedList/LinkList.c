@@ -177,10 +177,14 @@ node_p removeNodeByIndex(node_p head, int idx)
 			// iterate to the next node.
 			tmp = tmp->next;
 		}
+<<<<<<< HEAD
+		cur->next = tmp->next->next;
+=======
 		// find the target node "tmp".
 		cur = removeNode(head, tmp->data);
 		// deallocate the tmp memory address
 		free(tmp);
+>>>>>>> 9185a398199bc841c036ea183ce7d71c7c3c161b
 		return cur;
 	}
 	return NULL;

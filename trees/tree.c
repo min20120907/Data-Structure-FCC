@@ -9,6 +9,7 @@ typedef struct _TreeNode {
 TreeNodePtr buildTree (FILE *in) {
 	char word[101];
 	fscanf(in, "%s", word);
+	printf("word is %s\n", word);
 	if(strcmp(word, "@") == 0) return NULL;
 	else {
 		TreeNodePtr root = (TreeNodePtr) malloc(sizeof(TreeNode));
@@ -18,6 +19,32 @@ TreeNodePtr buildTree (FILE *in) {
 		return root;
 	}
 }
+
+TreeNodePtr buildTree_s (char *in) {
+
+	char a[strlen(in)];
+   	for (int i = 0; i< strlen(in);i++){
+        	a[i] =in[i];
+    	}
+	char *word = strtok(a, " ");
+        //printf("word is %s\n", word);
+        if(strcmp(word, "@") == 0) return NULL;
+        else {
+
+                TreeNodePtr root = (TreeNodePtr) malloc(sizeof(TreeNode));
+                int len = strlen(word);
+        	word = strtok(NULL, " ");
+        	char b[101];
+        	if(strlen(in)>=1){
+        	strncpy(b, in+len+1, strlen(in));
+		
+		root->left = buildTree(b);
+                root->right = buildTree(b);
+                return root;
+        	}else return NULL;
+		}
+}
+
 
 typedef void (*visit_func) (TreeNodePtr node);
 
@@ -29,6 +56,15 @@ void preOrder(TreeNodePtr root, visit_func v){
 	preOrder(root->left, v);
 	preOrder(root->right, v);
 
+}
+
+void inOrder(TreeNodePtr root, visit_func v){
+	if(root == NULL)return;
+        /* traversing */
+        inOrder(root->left, v);
+        /* visit code*/
+        v(root);
+        inOrder(root->right, v);
 }
 
 void print_node(TreeNodePtr node) {
@@ -77,16 +113,20 @@ int build_tree(TreeNodePtr root, FILE *in) {
 }*/
 
 int main(int argc, char **argv) {
-	FILE *in;
+	FILE *in, *out;
 	TreeNodePtr root;
 	
-	in = fopen("tree.in", "r");
-	root = buildTree(in);
+	in = fopen("tree.in", "w+");
+	fputs( "20 10 30 60 @ @ @ 70 @ 80 @ @ @", in);
 	fclose(in);
-	preOrder(root,print_node);
-	printf("\n");
+	//in = fmemopen("20 10 30 60 @ @ @ 70 @ 80 @ @ @", 101, "r");
+	out = fopen("tree.in","r");
+	root = buildTree(out);
+	fclose(in);
+	//preOrder(root,print_node);
+	//printf("\n");
 
-	preOrder(root,print_node_v2);
+	inOrder(root,print_node_v2);
 	printf("\n");
 	return 0;
 }

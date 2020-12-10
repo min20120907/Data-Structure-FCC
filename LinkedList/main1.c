@@ -32,7 +32,12 @@ int main(int argc, char **argv)
 
 	head = add_tail_node(head, a);
 	head = add_tail_node(head, b);
+<<<<<<< HEAD
+	head = removeNodeByIndex(head, 1);
+	//concat_nodes(a,b);
+=======
 	printf("Before:\n");
+>>>>>>> 9185a398199bc841c036ea183ce7d71c7c3c161b
 	print_list(head);
 	printf("Remove the index of %d\n", 1);
 	head = removeNodeByIndex(head, 1);
