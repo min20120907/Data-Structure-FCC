@@ -2,6 +2,9 @@
 #define _partition_h
 
 // Define each of the comparing function and swap function
+// p1 indicates the array source element
+// idx1 indicates the first comparing/swapping element inside the array
+// idx2 indicates the second comparing/swapping element inside the array
 typedef int (*cmp_fun) (void *p1, int idx1, int idx2);
 typedef void (*swap_fun) (void *p1, int idx1, int idx2);
 
