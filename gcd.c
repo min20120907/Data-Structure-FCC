@@ -10,6 +10,10 @@ int gcd(int a, int b) {
 }
 
 int main(int argc, char **argv){
-	printf("%d\n", gcd(252,198));
+	int a,b;
+	printf("Please input 2 numbers to gcd: \n");
+	scanf("%d",&a);
+	scanf("%d",&b);
+	printf("%d\n", gcd(a,b));
 	return 0;
 }
