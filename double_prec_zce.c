@@ -44,6 +44,7 @@ double getAverage(double allData[], int size) {
     for(int i=50; i<=149; i++) {
         total += clonedAllData[i];
     }
+    free(clonedAllData);
     return total/100;
 }
 
