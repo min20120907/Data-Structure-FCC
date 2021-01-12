@@ -1,6 +1,8 @@
 #ifndef directed_graph_h
 #define directed_graph_h
 typedef struct _Vinfo{
+	char color[100]="white";
+	double discover;
 	char name[100];
 	struct _Ainfo *adj;
 }ver, *ver_p;
